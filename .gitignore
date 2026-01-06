@@ -1,0 +1,44 @@
+# Vanta - Do not commit secrets
+.env
+local.properties
+*.jks
+*.keystore
+google-services.json
+
+# Gradle
+.gradle/
+build/
+gradle-8.9-bin.zip
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Kotlin
+*.class
+
+# Generated files
+/captures
+.externalNativeBuild
+.cxx
+
+# APT (Annotation Processing)
+.apt_generated/
+.apt_generated_tests/
+apt/
+*.apt_generated
+
+# KSP (Kotlin Symbol Processing)
+/app/build/generated/ksp/
+
+# Native build artifacts
+*.so
+*.o
+obj/
+
+# Logs
+*.log
+
+# Test outputs
+/test-output/
