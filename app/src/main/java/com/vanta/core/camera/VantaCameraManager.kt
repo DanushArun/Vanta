@@ -12,6 +12,7 @@ import com.vanta.core.common.DispatcherProvider
 import com.vanta.core.common.VantaLogger
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.Executors
@@ -69,7 +70,7 @@ class VantaCameraManager @Inject constructor(
             try {
                 cameraProvider = cameraProviderFuture.get()
                 bindCameraUseCases(lifecycleOwner)
-                isActive = true
+                this@VantaCameraManager.isActive = true
                 VantaLogger.i("Camera started", tag = TAG)
             } catch (e: Exception) {
                 VantaLogger.e("Failed to start camera", e, tag = TAG)

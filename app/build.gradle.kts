@@ -86,7 +86,7 @@ dependencies {
     implementation(libs.androidx.camera.view)
     
     // ML Kit - Object Detection (for future safety features)
-    implementation(libs.mlkit.`object`.detection)
+    implementation(libs.mlkit.objectdetection)
     
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)

@@ -103,6 +103,7 @@ fun VantaScreen(state: VantaCoordinator.VantaState) {
         is VantaCoordinator.VantaState.Connecting -> Color(0xFF1A1A2E)
         is VantaCoordinator.VantaState.Listening -> Color(0xFF0F3460)
         is VantaCoordinator.VantaState.Speaking -> Color(0xFF16213E)
+        is VantaCoordinator.VantaState.UserSpeaking -> Color(0xFF1B4332)  // Green tint when user speaks
         is VantaCoordinator.VantaState.Error -> Color(0xFF4A0000)
     }
     
@@ -111,6 +112,7 @@ fun VantaScreen(state: VantaCoordinator.VantaState) {
         is VantaCoordinator.VantaState.Connecting -> "Connecting..."
         is VantaCoordinator.VantaState.Listening -> "Listening"
         is VantaCoordinator.VantaState.Speaking -> "Speaking"
+        is VantaCoordinator.VantaState.UserSpeaking -> "You're Speaking"
         is VantaCoordinator.VantaState.Error -> "Error: ${state.message}"
     }
     
@@ -119,6 +121,7 @@ fun VantaScreen(state: VantaCoordinator.VantaState) {
         is VantaCoordinator.VantaState.Connecting -> "Vanta is connecting. Please wait."
         is VantaCoordinator.VantaState.Listening -> "Vanta is ready. Speak to ask a question."
         is VantaCoordinator.VantaState.Speaking -> "Vanta is speaking. You can interrupt anytime."
+        is VantaCoordinator.VantaState.UserSpeaking -> "You are speaking. Vanta is listening."
         is VantaCoordinator.VantaState.Error -> "Error occurred: ${state.message}"
     }
     
