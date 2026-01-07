@@ -133,7 +133,7 @@ function RoomContent() {
 
 
       <View style={styles.visualizerContainer}>
-        <Text style={styles.statusText}>Connected to Agent</Text>
+        <Text style={styles.statusText}>Connecting to Agent</Text>
         {/* Visualizer would go here */}
         <ActivityIndicator size="large" color="#00ff00" />
       </View>
