@@ -1,147 +1,97 @@
-# Vanta - Zero-UI Visual Assistant for the Blind
+This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-<p align="center">
-  <strong>Making the inaccessible, accessible.</strong>
-</p>
+# Getting Started
 
-Vanta is a real-time multimodal AI assistant designed to help blind users navigate social situations. It uses the Gemini 2.0 Flash Live API to provide instant feedback about facial expressions, body language, and social dynamics.
+> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
-## Features
+## Step 1: Start Metro
 
-### 🎭 Social Mode (Primary)
-- **Vibe Check**: Real-time understanding of who's in the room, their expressions, and attention
-- **Silent Exit Alerts**: Notifies when someone leaves without saying goodbye
-- **Clock Directions**: "Sarah is at 2 o'clock, smiling at you"
+First, you will need to run **Metro**, the JavaScript build tool for React Native.
 
-### 🪞 Mirror Mode
-- Quick appearance checks: clothing, stains, grooming
-- Honest feedback before important meetings
+To start the Metro dev server, run the following command from the root of your React Native project:
 
-### 🔇 Zero-UI Design
-- No buttons, no menus - fully voice-controlled
-- Barge-in: interrupt AI anytime by speaking
-- TalkBack compatible
+```sh
+# Using npm
+npm start
 
-## Quick Start
-
-### Prerequisites
-- Android Studio (latest)
-- Android device (API 29+) with camera
-- Gemini API key
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/DanushArun/Vanta.git
-   cd Vanta
-   ```
-
-2. **Download the Silero VAD model**
-   ```bash
-   python3 scripts/download_model.py
-   ```
-
-3. **Configure API key**
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your GEMINI_API_KEY
-   ```
-
-4. **Build and run**
-   ```bash
-   ./gradlew assembleDebug
-   # Install on device via Android Studio
-   ```
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                           Android App                            │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
-│  │   CameraX   │  │  AudioRecord │  │     Silero VAD         │  │
-│  │   640x480   │  │    16kHz     │  │   (Speech Detection)   │  │
-│  └──────┬──────┘  └──────┬──────┘  └───────────┬─────────────┘  │
-│         │                │                      │                │
-│         │                │     ┌────────────────┤                │
-│         ▼                ▼     ▼                │                │
-│  ┌──────────────────────────────────────────┐   │                │
-│  │           VantaCoordinator               │   │                │
-│  │  • Routes camera frames + audio          │   │                │
-│  │  • Handles barge-in detection            │◄──┘                │
-│  │  • Manages state transitions             │                    │
-│  └──────────────────┬───────────────────────┘                    │
-│                     │                                            │
-│                     ▼                                            │
-│  ┌──────────────────────────────────────────┐                    │
-│  │         GeminiLiveClient                 │                    │
-│  │  • WebSocket to Gemini 2.0 Flash         │                    │
-│  │  • Direct connection (no server)         │                    │
-│  │  • Server VAD disabled (using Silero)    │                    │
-│  └──────────────────────────────────────────┘                    │
-└─────────────────────────────────────────────────────────────────┘
-                           │
-                           │ WebSocket
-                           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    Gemini 2.0 Flash Live API                    │
-└─────────────────────────────────────────────────────────────────┘
+# OR using Yarn
+yarn start
 ```
 
-## Testing
+## Step 2: Build and run your app
 
-```bash
-# Run unit tests
-./gradlew testDebugUnitTest
+With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
 
-# Run with coverage
-./gradlew testDebugUnitTestCoverage
+### Android
+
+```sh
+# Using npm
+npm run android
+
+# OR using Yarn
+yarn android
 ```
 
-### TalkBack Testing
+### iOS
 
-1. Enable TalkBack: Settings → Accessibility → TalkBack
-2. Launch Vanta
-3. Verify all states are announced:
-   - "Vanta is connecting"
-   - "Vanta is ready. Speak to ask a question."
-   - "Vanta is speaking. You can interrupt anytime."
+For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
 
-## Configuration
+The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
-All settings are in `.env` or `app/src/main/java/com/vanta/core/config/`:
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `GEMINI_API_KEY` | - | Required API key |
-| `CAMERA_FRAME_RATE` | 2 | FPS (1-4) |
-| `CAMERA_JPEG_QUALITY` | 50 | JPEG compression |
-| `VAD_RMS_THRESHOLD` | 800 | Speech detection sensitivity |
-
-## Project Structure
-
-```
-app/src/main/java/com/vanta/
-├── core/
-│   ├── audio/          # Mic, Speaker, Silero VAD
-│   ├── camera/         # CameraX manager
-│   ├── common/         # Utilities, logging
-│   └── config/         # VantaConfig, SystemPrompts
-├── data/
-│   └── network/        # GeminiLiveClient, messages
-├── di/                 # Hilt modules
-├── domain/
-│   └── coordinator/    # Main orchestrator
-├── service/            # Foreground service
-└── ui/                 # MainActivity, Theme
+```sh
+bundle install
 ```
 
-## Contributing
+Then, and every time you update your native dependencies, run:
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+```sh
+bundle exec pod install
+```
 
-## License
+For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
 
-MIT License - see [LICENSE](LICENSE)
+```sh
+# Using npm
+npm run ios
+
+# OR using Yarn
+yarn ios
+```
+
+If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+
+This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+
+## Step 3: Modify your app
+
+Now that you have successfully run the app, let's make changes!
+
+Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+
+When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+
+- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
+- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+
+## Congratulations! :tada:
+
+You've successfully run and modified your React Native App. :partying_face:
+
+### Now what?
+
+- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
+- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+
+# Troubleshooting
+
+If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+
+# Learn More
+
+To learn more about React Native, take a look at the following resources:
+
+- [React Native Website](https://reactnative.dev) - learn more about React Native.
+- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
+- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
+- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
+- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.

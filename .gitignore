@@ -1,44 +1,85 @@
-# Vanta - Do not commit secrets
-.env
-local.properties
-*.jks
-*.keystore
-google-services.json
-
-# Gradle
-.gradle/
-build/
-gradle-8.9-bin.zip
-
-# IDE
-.idea/
-*.iml
+# OSX
+#
 .DS_Store
 
-# Kotlin
-*.class
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+**/.xcode.env.local
 
-# Generated files
-/captures
-.externalNativeBuild
-.cxx
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+.kotlin/
 
-# APT (Annotation Processing)
-.apt_generated/
-.apt_generated_tests/
-apt/
-*.apt_generated
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
 
-# KSP (Kotlin Symbol Processing)
-/app/build/generated/ksp/
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
 
-# Native build artifacts
-*.so
-*.o
-obj/
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
 
-# Logs
-*.log
+# Bundle artifact
+*.jsbundle
 
-# Test outputs
-/test-output/
+# Ruby / CocoaPods
+**/Pods/
+/vendor/bundle/
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
+
+# testing
+/coverage
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+agent/.env
