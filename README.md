@@ -1,97 +1,60 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Vanta
 
-# Getting Started
+A React Native client for connecting to a LiveKit room and interacting with a live assistant.
+The connection screen accepts a server URL and room token; the room UI handles the session.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## System boundary
 
-## Step 1: Start Metro
+```mermaid
+flowchart LR
+    App[Vanta native app] --> Room[LiveKit room]
+    Room --> Agent[External assistant agent]
+```
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+The repository contains the mobile client. A token issuer, LiveKit deployment and assistant
+agent must be supplied separately. The UI's Gemini assistant label is not evidence that a
+Gemini backend is implemented in this checkout.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Development setup
 
-```sh
-# Using npm
+Use Node 20+ and the native toolchain for your target platform.
+
+```bash
+git clone https://github.com/DanushArun/Vanta.git
+cd Vanta
+npm ci
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+In another terminal:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+For iOS, install Ruby/CocoaPods dependencies and then run the native app:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
+```bash
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
+cd ios
 bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+cd ..
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+Use your own LiveKit URL and a valid session token in the connection screen.
+Grant the requested media permissions for the session.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Source and verification
 
-## Step 3: Modify your app
+[App.tsx](App.tsx) contains connection and room UI. The manifest declares React Native 0.83.1,
+React 19.2.0 and LiveKit native/WebRTC packages.
 
-Now that you have successfully run the app, let's make changes!
+```bash
+npm run lint
+npm test -- --runInBand
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+These are the declared verification commands; they were not rerun for this documentation update.
+Source and manifest inspection does not establish media quality, reconnection reliability,
+provider availability or a successful assistant conversation. No live room was joined.
